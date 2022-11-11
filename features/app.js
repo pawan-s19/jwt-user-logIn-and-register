@@ -6,8 +6,10 @@ var logger = require("morgan");
 const dotenv = require("dotenv");
 var productRouter = require("./routes/productRoute");
 var userRouter = require("./routes/userRoute");
+var orderRouter = require("./routes/orderRoute");
 var app = express();
-
+const cors = require("cors");
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 dotenv.config({ path: "./.env" });
 
 require("./models/database").dbConnection();
@@ -19,6 +21,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", productRouter);
 app.use("/", userRouter);
+app.use("/", orderRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

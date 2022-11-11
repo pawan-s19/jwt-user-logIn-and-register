@@ -3,15 +3,18 @@ const validator = require("validator");
 const { Schema, model } = mongoose;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 const userSchema = new Schema({
   username: {
     type: String,
+    unique: true,
     required: [true, "please enter a username"],
     maxLength: [20, "username cannot exceed 20 characters"],
     minLength: [3, "username should more than 2 characters"],
   },
   email: {
     type: String,
+    unique: true,
     required: [true, "please enter your email"],
     validate: [validator.isEmail, "Please enter a valid Email"],
   },
@@ -57,4 +60,18 @@ userSchema.methods.getJWTToken = function () {
 userSchema.methods.comparePassword = async function (usersPassword) {
   return await bcrypt.compare(usersPassword, this.password);
 };
+
+userSchema.methods.getPasswordToken = function () {
+  const token = crypto.randomBytes(20).toString("hex");
+
+  //making this token strong using hashing and saving it in userSchema
+
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+  return token;
+};
+
 module.exports = model("userModel", userSchema);

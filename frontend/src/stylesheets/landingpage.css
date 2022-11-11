@@ -1,0 +1,15 @@
+.landing-page {
+  width: 100%;
+  height: 90vh;
+}
+.landing-page i {
+  font-size: 3rem;
+}
+
+.landing-page .scroll {
+  margin-top: 3em;
+  text-align: center;
+}
+.landing-page .scroll :hover {
+  cursor: pointer;
+}

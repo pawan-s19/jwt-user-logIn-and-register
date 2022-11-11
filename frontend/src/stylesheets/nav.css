@@ -1,0 +1,27 @@
+.nav {
+  height: 10vh;
+
+  width: 100%;
+}
+.nav i {
+  font-size: 1.5rem;
+  margin-right: 1.2rem;
+}
+.nav button {
+  border-radius: 2em;
+  border: 1px solid black;
+}
+.nav .search-links {
+  height: 100%;
+}
+.nav .search-links textarea {
+  border-radius: 3rem;
+  resize: none;
+  height: 60%;
+  width: 20vw;
+  padding: 0.5rem 1rem;
+  margin-right: 4vw;
+}
+.nav .search-links h5 {
+  margin-left: 2vw;
+}
